@@ -26,6 +26,7 @@ public class MYSQLBackgroundTask extends AsyncTask<String,Void, String> {
     //private String reg_url =  "http://athena.ecs.csus.edu/~wonge/rideshare/register.php";
     //private String login_url = "http://athena.ecs.csus.edu/~wonge/rideshare/login.php";
 
+    //LOCAL server url
     private String reg_url = "http://10.0.2.2/RideshareMysql/register.php";
     private String login_url= "http://10.0.2.2/RideshareMysql/login.php";
 
@@ -54,7 +55,7 @@ public class MYSQLBackgroundTask extends AsyncTask<String,Void, String> {
             String specialNeeds = params[8];
             //  String nullName = null;
 
-            System.out.println(email + " " + password + " " + firstName + " " + lastName + " " + zipcode + " " + gender + " " + studentorfaculty + " " + specialNeeds);
+            //System.out.println(email + " " + password + " " + firstName + " " + lastName + " " + zipcode + " " + gender + " " + studentorfaculty + " " + specialNeeds);
 
             try {
                 URL url = new URL(reg_url);

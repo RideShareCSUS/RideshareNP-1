@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,7 +32,11 @@ public class Login extends AppCompatActivity {
     //Runs login
     private void loginRun(){
         loginLayout();
+        userTouch();
+    }
 
+    //Handles user text field & button action
+    private void userTouch(){
         loginbut.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startBackgroundTask();
@@ -39,26 +46,8 @@ public class Login extends AppCompatActivity {
 
         regibut.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(mContext,  Register.class));
+                startActivity(new Intent(mContext, Register.class));
             }
-        });
-
-        //Clearing text fields
-
-        emaillogintxt.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if((emaillogintxt.getText()+"").equals("E-mail"))
-                    emaillogintxt.setText("");
-            }
-
-        });
-
-        passtxt.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if ((passtxt.getText() + "").equals("Password"))
-                    passtxt.setText("");
-            }
-
         });
 
     }
@@ -79,10 +68,11 @@ public class Login extends AppCompatActivity {
         regibut = (Button) findViewById(R.id.regibutid);
         emaillogintxt = (EditText) findViewById(R.id.emaillogintxtid);
         passtxt = (EditText) findViewById(R.id.passtxtid);
+
         loginbut.setText("Login");
         regibut.setText("Register");
-        emaillogintxt.setText("E-mail");
-        passtxt.setText("Password");
+        emaillogintxt.setHint("E-mail");
+        passtxt.setHint("Password");
     }
 
     @Override
@@ -106,4 +96,5 @@ public class Login extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }

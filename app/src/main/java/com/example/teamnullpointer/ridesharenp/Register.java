@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,10 +21,11 @@ import android.widget.TextView;
 public class Register extends AppCompatActivity {
     private Context ctx;
 
+    //Radio button text extract
     private RadioButton chosenButton;
 
     //Text fields
-    private EditText email, password, firstname, lastname,zip;
+    private EditText email, password, firstname, lastname, zip;
 
     //Radio group - (GENDER)
     private RadioGroup gender;
@@ -52,16 +56,19 @@ public class Register extends AppCompatActivity {
     }
 
     //Runs register
-    private void registerRun(){
+    private void registerRun() {
         registerLayout();
+        userTouch();
+    }
 
+    //Handles user text field & button action
+    private void userTouch() {
         //Sumbit button listener
         enterbut.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startBackgroundTask();
                 startActivity(new Intent(ctx, Login.class));
             }
-
         });
     }
 
@@ -73,11 +80,11 @@ public class Register extends AppCompatActivity {
         lastname = (EditText) findViewById(R.id.lastnametxtid);
         zip = (EditText) findViewById(R.id.zipcodetxtid);
 
-        email.setText("E-Mail");
-        password.setText("Password");
-        firstname.setText("First Name");
-        lastname.setText("Last Name");
-        zip.setText("Zip Code");
+        email.setHint("E-Mail");
+        password.setHint("Password");
+        firstname.setHint("First Name");
+        lastname.setHint("Last Name");
+        zip.setHint("Zip Code");
 
         genderRadioTitle = (TextView) findViewById(R.id.gendertitleid);
         genderRadioTitle.setText("Gender");
