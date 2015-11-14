@@ -54,7 +54,7 @@ public class MYSQLBackgroundTask extends AsyncTask<String,Void, String> {
             String specialNeeds = params[8];
             //  String nullName = null;
 
-            // System.out.println(email + " " + password + " " + firstName + " " + lastName + " " + zipcode + " " + gender + " " + studentorfaculty + " " + specialNeeds);
+            System.out.println(email + " " + password + " " + firstName + " " + lastName + " " + zipcode + " " + gender + " " + studentorfaculty + " " + specialNeeds);
 
             try {
                 URL url = new URL(reg_url);
