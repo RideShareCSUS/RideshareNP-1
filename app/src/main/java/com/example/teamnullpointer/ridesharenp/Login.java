@@ -2,6 +2,7 @@ package com.example.teamnullpointer.ridesharenp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -12,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 //Login page
 public class Login extends AppCompatActivity {
@@ -68,6 +70,15 @@ public class Login extends AppCompatActivity {
         regibut = (Button) findViewById(R.id.regibutid);
         emaillogintxt = (EditText) findViewById(R.id.emaillogintxtid);
         passtxt = (EditText) findViewById(R.id.passtxtid);
+
+
+        Login.this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                ImageView logo = (ImageView) findViewById(R.id.imageviewid);
+                logo.setImageResource(R.drawable.sslogo);
+            }
+        });
 
         loginbut.setText("Login");
         regibut.setText("Register");

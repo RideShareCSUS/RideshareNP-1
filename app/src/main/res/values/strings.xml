@@ -7,4 +7,8 @@
     <string name="title_activity_login">Login</string>
     <string name="title_activity_register">Register</string>
     <string name="title_activity_centeral_hub">CenteralHub</string>
+    <string name="title_activity_post">Post</string>
+    <string name="title_activity_show_rider_posts">ShowRiderPosts</string>
+    <string name="title_activity_show_driver_posts">ShowDriverPosts</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

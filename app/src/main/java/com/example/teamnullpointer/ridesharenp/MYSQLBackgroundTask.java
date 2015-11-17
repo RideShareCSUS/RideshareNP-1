@@ -23,12 +23,13 @@ public class MYSQLBackgroundTask extends AsyncTask<String,Void, String> {
     private Context ctx;
 
     //MYSQL server url
-    //private String reg_url =  "http://athena.ecs.csus.edu/~wonge/rideshare/register.php";
-    //private String login_url = "http://athena.ecs.csus.edu/~wonge/rideshare/login.php";
+    private String reg_url =  "http://athena.ecs.csus.edu/~wonge/rideshare/register.php";
+    private String login_url = "http://athena.ecs.csus.edu/~wonge/rideshare/login.php";
+    private String post_url = "http://athena.ecs.csus.edu/~wonge/rideshare/post.php";
 
     //LOCAL server url
-    private String reg_url = "http://10.0.2.2/RideshareMysql/register.php";
-    private String login_url= "http://10.0.2.2/RideshareMysql/login.php";
+    //private String reg_url = "http://10.0.2.2/RideshareMysql/register.php";
+    //private String login_url= "http://10.0.2.2/RideshareMysql/login.php";
 
     MYSQLBackgroundTask(Context ctx){
         this.ctx= ctx;
@@ -100,6 +101,45 @@ public class MYSQLBackgroundTask extends AsyncTask<String,Void, String> {
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(OS,"UTF-8"));
                 String dataLogin = URLEncoder.encode("Email", "UTF-8") +"="+URLEncoder.encode(name, "UTF-8") +"&"+
                         URLEncoder.encode("Password", "UTF-8") +"="+URLEncoder.encode(pass, "UTF-8");
+                bufferedWriter.write(dataLogin);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                OS.close();
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+                String response = "";
+                String line = "";
+                while((line = bufferedReader.readLine()) != null){
+                    response += line;
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return response;
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (ProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        } else if (method.equals("post")) {
+            //Post
+            String description = params[1];
+            String rdtype = params[2];
+
+            try {
+                URL url = new URL(post_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream OS = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(OS,"UTF-8"));
+                String dataLogin = URLEncoder.encode("Description", "UTF-8") +"="+URLEncoder.encode(description, "UTF-8")+"&"+
+                        URLEncoder.encode("RDType", "UTF-8") + "=" +URLEncoder.encode(rdtype, "UTF-8");
                 bufferedWriter.write(dataLogin);
                 bufferedWriter.flush();
                 bufferedWriter.close();

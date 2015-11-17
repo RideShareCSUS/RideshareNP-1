@@ -40,6 +40,7 @@ public class Register extends AppCompatActivity {
     //Radio group - (SPECIAL ACCOMMODATIONS)
     private RadioGroup special;
     private RadioButton specialYes;
+    private RadioButton specialNo;
     private TextView specialTitle;
 
     //Sumbit button
@@ -103,10 +104,12 @@ public class Register extends AppCompatActivity {
         faculty.setText("Faculty");
 
         specialTitle = (TextView) findViewById(R.id.specialtitleid);
-        specialTitle.setText("Special accommodation");
+        specialTitle.setText("Special Accommodations");
         special = (RadioGroup) findViewById(R.id.specialradioid);
         specialYes = (RadioButton) findViewById(R.id.radioyesspecialid);
         specialYes.setText("Yes");
+        specialNo = (RadioButton) findViewById(R.id.radionospecialid);
+        specialNo.setText("No");
 
 
         enterbut = (Button) findViewById(R.id.enterbutid);
@@ -129,14 +132,14 @@ public class Register extends AppCompatActivity {
         chosenButton = (RadioButton) findViewById(selectedId);
         String theSSM = chosenButton.getText().toString();
 
-        String theSpecial = "";
+       // String theSpecial = "";
         selectedId = special.getCheckedRadioButtonId();
-        if(selectedId != -1) {
-            chosenButton = (RadioButton) findViewById(selectedId);
-            theSpecial = chosenButton.getText().toString();
-        } else {
-            theSpecial = "No";
-        }
+       // if(selectedId != -1) {
+        chosenButton = (RadioButton) findViewById(selectedId);
+        String theSpecial = chosenButton.getText().toString();
+        //} else {
+          //  theSpecial = "No";
+        //}
 
         //System.out.println(emailLogin + " " + passwordLogin + " " + firstName + " " + lastName + " " + zipcode + " " + theGender + " " + theSSM + " " + theSpecial);
 
