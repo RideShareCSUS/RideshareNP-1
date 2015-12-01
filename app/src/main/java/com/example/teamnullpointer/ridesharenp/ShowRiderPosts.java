@@ -3,6 +3,7 @@ package com.example.teamnullpointer.ridesharenp;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,7 +32,7 @@ public class ShowRiderPosts extends AppCompatActivity {
     String json_string;
     JSONObject jsonObject;
     JSONArray jsonArray;
-    ContactAdapter contactAdapter;
+    PostDatabaseAdapter postdatabaseadapter;
     ListView listView;
     Button refreshbut;
 
@@ -39,11 +40,13 @@ public class ShowRiderPosts extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_rider_posts);
+        setTitle("Riders");
+
         listView = (ListView) findViewById(R.id.listviewid);
         refreshbut = (Button) findViewById(R.id.refreshbutid);
         refreshbut.setText("Refresh");
-        contactAdapter = new ContactAdapter(this,R.layout.row_layout);
-        listView.setAdapter(contactAdapter);
+        postdatabaseadapter = new PostDatabaseAdapter(this,R.layout.row_layout);
+        listView.setAdapter(postdatabaseadapter);
         json_string = getIntent().getExtras().getString("json_data");
 
         try {
@@ -54,8 +57,8 @@ public class ShowRiderPosts extends AppCompatActivity {
             while(count<jsonArray.length()) {
                 JSONObject JO = jsonArray.getJSONObject(count);
                 description = JO.getString("description");
-                Contacts contacts = new Contacts(description);
-                contactAdapter.add(contacts);
+                PostDatabase postdatabase = new PostDatabase(description);
+                postdatabaseadapter.add(postdatabase);
                 count++;
             }
 
@@ -63,29 +66,16 @@ public class ShowRiderPosts extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        //listview = (ListView) findViewById(R.id.listviewid);
-        //list_file = new ArrayList<String>();
-        //ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1 ,list_file);
-
-      /*list_file.add("123 Need a ride! Days needed: Mo Tue wen Thur Fri");
-      list_file.add("123");
-      list_file.add("123");
-      list_file.add("123");
-      list_file.add("123");
-      list_file.add("123");
-      list_file.add("123");
-      list_file.add("123");
-      list_file.add("123");
-      list_file.add("123");
-      list_file.add("123");
-      list_file.add("123");
-      list_file.add("123");
-      list_file.add("123");*/
-
-        //listview.setAdapter(arrayAdapter);
     }
 
-
+    //Handle back button
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK ) {
+            finish();
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

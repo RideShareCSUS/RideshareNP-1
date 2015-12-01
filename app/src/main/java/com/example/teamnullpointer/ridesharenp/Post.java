@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,6 +31,7 @@ public class Post extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
+        setTitle("Post");
         ctx = this.getApplicationContext();
 
         postRun();
@@ -38,6 +40,15 @@ public class Post extends AppCompatActivity {
     private void postRun() {
         postLayout();
         postClick();
+    }
+
+    //Handle back button
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK ) {
+           finish();
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     private void postClick() {
@@ -117,6 +128,7 @@ public class Post extends AppCompatActivity {
         String method = "post";
         MYSQLBackgroundTask backgroundTask = new MYSQLBackgroundTask(this);
         backgroundTask.execute(method, description,rdtype);
+        finish();
 
     }
 }

@@ -29,7 +29,8 @@
         </activity>
         <activity
             android:name=".Login"
-            android:label="@string/title_activity_login" >
+            android:label="@string/title_activity_login"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".Register"
@@ -57,11 +58,15 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:value="AIzaSyD-EJ1oZfwxIfQzJ8ZhTZLoZyQACqEg9_w" />
 
         <activity
             android:name=".Maps"
             android:label="@string/title_activity_maps" >
+        </activity>
+        <activity
+            android:name=".TermsOfService"
+            android:label="@string/title_activity_terms_of_service" >
         </activity>
     </application>
 

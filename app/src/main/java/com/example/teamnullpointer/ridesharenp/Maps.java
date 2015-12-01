@@ -2,6 +2,7 @@ package com.example.teamnullpointer.ridesharenp;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -26,6 +27,15 @@ public class Maps extends FragmentActivity {
     protected void onResume() {
         super.onResume();
         setUpMapIfNeeded();
+    }
+
+    //Handle back button
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK ) {
+            finish();
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     /**

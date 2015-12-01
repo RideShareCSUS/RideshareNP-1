@@ -4,53 +4,79 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="#FFFFFF"
+    android:id="@+id/layoutid"
     tools:context="com.example.teamnullpointer.ridesharenp.Login">
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Button"
+            android:id="@+id/regibutid"
+            android:layout_alignParentBottom="true"
+            android:layout_alignRight="@+id/loginbutid"
+            android:layout_alignEnd="@+id/loginbutid"
+            android:layout_marginBottom="28dp"
+            android:background="#c3b174"
+            android:layout_alignLeft="@+id/loginbutid"
+            android:layout_alignStart="@+id/loginbutid" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:ems="10"
+            android:id="@+id/emaillogintxtid"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/passtxtid"
+            android:layout_alignLeft="@+id/emaillogintxtid"
+            android:layout_alignStart="@+id/emaillogintxtid"
+            android:layout_below="@+id/emaillogintxtid"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Button"
         android:id="@+id/loginbutid"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="81dp" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/regibutid"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/loginbutid"
-        android:layout_alignEnd="@+id/loginbutid"
-        android:layout_marginBottom="28dp" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:ems="10"
-        android:id="@+id/emaillogintxtid"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/passtxtid"
-        android:layout_marginTop="24dp"
-        android:layout_below="@+id/emaillogintxtid"
-        android:layout_alignLeft="@+id/emaillogintxtid"
-        android:layout_alignStart="@+id/emaillogintxtid" />
+        android:layout_gravity="center_horizontal"
+        android:background="#00573c"
+        android:layout_above="@+id/regibutid"
+        android:layout_alignLeft="@+id/passtxtid"
+        android:layout_alignStart="@+id/passtxtid"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageviewid"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:layout_above="@id/emaillogintxtid"/>
+
+    <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageviewid"
-        android:layout_alignParentTop="true"
-        android:layout_centerInParent="true"
-        android:layout_above="@id/emaillogintxtid"/>
+        android:text="Remember Me"
+        android:id="@+id/remembermeid"
+        android:checked="false"
+        android:layout_below="@+id/passtxtid"
+        android:layout_alignRight="@+id/passtxtid"
+        android:layout_alignEnd="@+id/passtxtid" />
 
 </RelativeLayout>
+
+

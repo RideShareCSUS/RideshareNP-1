@@ -4,7 +4,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.example.teamnullpointer.ridesharenp.Register">
+    tools:context="com.example.teamnullpointer.ridesharenp.Register"
+    android:background="#ffffff">
 
     <ScrollView
         android:layout_width="wrap_content"
@@ -26,131 +27,228 @@
             android:layout_alignParentBottom="true"
             android:weightSum="1">
 
-            <EditText
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:ems="10"
-                android:id="@+id/emaillogintxtid" />
+                android:layout_height="match_parent">
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/passwordtxtid" />
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/emaillogintxtid" />
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/firstnametxtid" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/emaillogintxtid"
+                    android:id="@+id/passwordtxtid" />
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:ems="10"
-                android:id="@+id/lastnametxtid"
-                android:layout_gravity="center_horizontal" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/passwordtxtid"
+                    android:id="@+id/firstnametxtid" />
 
-            <EditText
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:layout_below="@+id/firstnametxtid"
+                    android:id="@+id/lastnametxtid"
+                    android:layout_gravity="center_horizontal" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/zipcodetxtid"
+                    android:layout_below="@+id/lastnametxtid"
+                    android:layout_gravity="center_horizontal" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:ems="10"
-                android:id="@+id/zipcodetxtid"
-                android:layout_gravity="center_horizontal" />
+                android:layout_height="match_parent">
+
+
+                <RadioGroup
+                    android:id="@+id/genderradioid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:weightSum="1">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="Small Text"
+                        android:id="@+id/gendertitleid"
+                        android:layout_weight="1.34" />
+
+                    <RadioButton
+                        android:id="@+id/radiomaleid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:gravity="center"
+                        android:checked="false" />
+
+                    <RadioButton
+                        android:id="@+id/radiofemaleid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/radiootherid"
+                        android:checked="false"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginRight="81dp"
+                        android:layout_marginEnd="81dp" />
+
+                </RadioGroup>
+
+            </RelativeLayout>
+
+
+
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent">
+
+                <RadioGroup
+                    android:id="@+id/ssmradioid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="Small Text"
+                        android:id="@+id/ssmembertxtid" />
+
+                    <RadioButton
+                        android:id="@+id/radiostudentid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:checked="false" />
+
+                    <RadioButton
+                        android:id="@+id/radiofacid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:checked="false" />
+
+                </RadioGroup>
+            </RelativeLayout>
+
+
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent">
+
+                <RadioGroup
+                    android:id="@+id/specialradioid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="Small Text"
+                        android:id="@+id/specialtitleid" />
+
+                    <RadioButton
+                        android:id="@+id/radioyesspecialid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:checked="false" />
+
+                    <RadioButton
+                        android:id="@+id/radionospecialid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:checked="false" />
+
+                </RadioGroup>
+
+            </RelativeLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Small Text"
-                android:id="@+id/gendertitleid"
-                android:layout_gravity="center_horizontal" />
+                android:text="Day of Birth:"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/birthdaytitleid" />
 
-            <RadioGroup
-                android:id="@+id/genderradioid"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal">
 
-                <RadioButton
-                    android:id="@+id/radiomaleid"
+
+
+                <NumberPicker
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="false" />
+                    android:id="@+id/monthpickid"
+                    android:layout_alignParentTop="true"
+                    android:layout_toLeftOf="@+id/daypickid"
+                    android:layout_toStartOf="@+id/daypickid" />
 
-                <RadioButton
-                    android:id="@+id/radiofemaleid"
+                <NumberPicker
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="false" />
+                    android:id="@+id/daypickid"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_centerInParent="true" />
 
-            </RadioGroup>
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Small Text"
-                android:id="@+id/ssmembertxtid"
-                android:layout_gravity="center_horizontal" />
-
-            <RadioGroup
-                android:id="@+id/ssmradioid"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
-
-                <RadioButton
-                    android:id="@+id/radiostudentid"
+                <NumberPicker
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="false" />
+                    android:id="@+id/yearpickid"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/daypickid"
+                    android:layout_toEndOf="@+id/daypickid" />
 
-                <RadioButton
-                    android:id="@+id/radiofacid"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="false" />
+            </RelativeLayout>
 
-            </RadioGroup>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Small Text"
-                android:id="@+id/specialtitleid"
-                android:layout_gravity="center_horizontal" />
-
-
-            <RadioGroup
-                android:id="@+id/specialradioid"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
-
-                <RadioButton
-                    android:id="@+id/radioyesspecialid"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="false" />
-
-                <RadioButton
-                    android:id="@+id/radionospecialid"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="false" />
-
-            </RadioGroup>
 
             <Button
                 style="?android:attr/buttonStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 android:text="New Button"
                 android:id="@+id/enterbutid"
-                android:layout_gravity="center_horizontal" />
-
+                android:layout_gravity="center_horizontal"
+                android:background="#c3b174" />
         </LinearLayout>
+
     </ScrollView>
 
 

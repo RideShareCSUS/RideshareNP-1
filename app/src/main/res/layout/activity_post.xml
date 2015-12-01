@@ -6,67 +6,90 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.example.teamnullpointer.ridesharenp.Post">
 
-    <RadioGroup
-        android:id="@+id/postgroupid"
+    <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/titleid"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-
-
-        <RadioButton
-            android:id="@+id/driverid"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:layout_marginTop="57dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <RadioButton
-            android:id="@+id/riderid"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:layout_alignTop="@+id/driverid"
-            android:layout_alignRight="@+id/postid"
-            android:layout_alignEnd="@+id/postid" />
-
-    </RadioGroup>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/postid"
-        android:layout_marginBottom="51dp"
+        android:id="@+id/scrollView"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Choose to post as..."
-        android:id="@+id/titleid"
-        android:gravity="center"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:ems="10"
-        android:maxLength="45"
-        android:id="@+id/descriptid"
-        android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="473dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Choose to post as..."
+                    android:id="@+id/titleid"
+                    android:gravity="center"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center_horizontal" />
+
+                <RadioGroup
+                    android:id="@+id/postgroupid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toLeftOf="@+id/titleid"
+                    android:layout_toStartOf="@+id/titleid">
+
+
+                    <RadioButton
+                        android:id="@+id/driverid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:layout_marginTop="57dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true" />
+
+                    <RadioButton
+                        android:id="@+id/riderid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:layout_alignTop="@+id/driverid"
+                        android:layout_alignRight="@+id/postid"
+                        android:layout_alignEnd="@+id/postid" />
+
+                </RadioGroup>
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:ems="10"
+                    android:maxLength="45"
+                    android:id="@+id/descriptid"
+                    android:layout_above="@+id/postid"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="53dp" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="New Button"
+                    android:id="@+id/postid"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="46dp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </RelativeLayout>

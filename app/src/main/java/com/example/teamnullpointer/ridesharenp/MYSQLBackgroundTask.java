@@ -19,7 +19,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 
-public class MYSQLBackgroundTask extends AsyncTask<String,Void, String> {
+public class MYSQLBackgroundTask extends AsyncTask<String,Void,String> {
     private Context ctx;
 
     //MYSQL server url
@@ -54,7 +54,7 @@ public class MYSQLBackgroundTask extends AsyncTask<String,Void, String> {
             String gender = params[6];
             String studentorfaculty = params[7];
             String specialNeeds = params[8];
-            //  String nullName = null;
+            //  String dayOfBirth = params[9];
 
             //System.out.println(email + " " + password + " " + firstName + " " + lastName + " " + zipcode + " " + gender + " " + studentorfaculty + " " + specialNeeds);
 
@@ -73,6 +73,7 @@ public class MYSQLBackgroundTask extends AsyncTask<String,Void, String> {
                         URLEncoder.encode("Gender", "UTF-8") + "=" + URLEncoder.encode(gender, "UTF-8") + "&" +
                         URLEncoder.encode("SSM", "UTF-8") + "=" + URLEncoder.encode(studentorfaculty, "UTF-8") + "&" +
                         URLEncoder.encode("Special", "UTF-8") + "=" + URLEncoder.encode(specialNeeds, "UTF-8");
+                //+ "&" + URLEncoder.encode("Day_Of_Birth", "UTF-8") + "=" + URLEncoder.encode(dayOfBirth, "UTF-8"
 
                 bufferWriter.write(dataReg);
                 bufferWriter.flush();

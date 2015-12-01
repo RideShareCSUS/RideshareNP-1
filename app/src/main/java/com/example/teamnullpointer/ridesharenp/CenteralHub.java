@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,13 +21,14 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class CenteralHub extends AppCompatActivity {
-    Button postbut, driverbut, riderbut, mapbut;
-    Context ctx;
+    private Button postbut, driverbut, riderbut, mapbut;
+    private Context ctx;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_centeral_hub);
+        setTitle("Home");
         ctx = this.getApplicationContext();
 
         centralHubRun();
@@ -47,6 +49,15 @@ public class CenteralHub extends AppCompatActivity {
         driverbut.setText("Find Drivers");
         riderbut.setText("Find Riders");
         mapbut.setText("Maps");
+    }
+
+    //Handle back button
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK ) {
+            finish();
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     private void centralClick(){

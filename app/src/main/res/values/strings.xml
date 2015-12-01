@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RideshareNP</string>
+    <string name="app_name">Rideshare</string>
     <string name="title_activity_main">MainActivity</string>
 
     <string name="hello_world">Hello world!</string>
@@ -11,4 +11,5 @@
     <string name="title_activity_show_rider_posts">ShowRiderPosts</string>
     <string name="title_activity_show_driver_posts">ShowDriverPosts</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_terms_of_service">TermsOfService</string>
 </resources>

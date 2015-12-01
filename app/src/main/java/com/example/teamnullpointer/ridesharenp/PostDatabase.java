@@ -1,12 +1,10 @@
 package com.example.teamnullpointer.ridesharenp;
 
-/**
- * Created by eric on 11/15/15.
- */
-public class Contacts {
+
+public class PostDatabase {
     private String description;
 
-    public Contacts(String description) {
+    public PostDatabase(String description) {
         this.setDescription(description);
     }
 

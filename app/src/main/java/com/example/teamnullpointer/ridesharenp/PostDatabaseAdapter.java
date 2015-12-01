@@ -14,13 +14,13 @@ import java.util.Objects;
 /**
  * Created by eric on 11/15/15.
  */
-public class ContactAdapter extends ArrayAdapter {
+public class PostDatabaseAdapter extends ArrayAdapter {
     List list = new ArrayList();
-    public ContactAdapter(Context context, int resource) {
+    public PostDatabaseAdapter(Context context, int resource) {
         super(context, resource);
     }
 
-    public void add(Contacts object) {
+    public void add(PostDatabase object) {
         super.add(object);
         list.add(object);
     }
@@ -39,23 +39,23 @@ public class ContactAdapter extends ArrayAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View row;
         row = convertView;
-        ContactHolder contactHolder;
+        PostDatabaseHolder postdatabaseholder;
         if (row == null) {
             LayoutInflater layoutInflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             row = layoutInflater.inflate(R.layout.row_layout,parent,false);
-            contactHolder = new ContactHolder();
-            contactHolder.tx_description = (TextView) row.findViewById(R.id.tx_description);
-            row.setTag(contactHolder);
+            postdatabaseholder = new PostDatabaseHolder();
+            postdatabaseholder.tx_description = (TextView) row.findViewById(R.id.tx_description);
+            row.setTag(postdatabaseholder);
         } else {
-            contactHolder = (ContactHolder) row.getTag();
+            postdatabaseholder = (PostDatabaseHolder) row.getTag();
         }
 
-        Contacts contacts = (Contacts) this.getItem(position);
-        contactHolder.tx_description.setText(contacts.getDescription());
+        PostDatabase postdatabase = (PostDatabase) this.getItem(position);
+        postdatabaseholder.tx_description.setText(postdatabase.getDescription());
         return row;
     }
 
-    static class ContactHolder {
+    static class PostDatabaseHolder {
         TextView tx_description;
     }
 }
