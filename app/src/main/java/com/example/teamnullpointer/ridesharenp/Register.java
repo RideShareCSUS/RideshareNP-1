@@ -213,8 +213,8 @@ public class Register extends AppCompatActivity {
        } else {
            String method = "register";
            MYSQLBackgroundTask backgroundTask = new MYSQLBackgroundTask(this);
-           backgroundTask.execute(method, emailLogin, passwordLogin, firstName, lastName, zipcode, theGender, theSSM, theSpecial); //,theBirthday
-           finish();
+           backgroundTask.execute(method, emailLogin, passwordLogin, firstName, lastName, zipcode, theGender, theSSM, theSpecial ,theBirthday);
+           //finish();
        }
 
     }

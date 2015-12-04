@@ -54,7 +54,7 @@ public class MYSQLBackgroundTask extends AsyncTask<String,Void,String> {
             String gender = params[6];
             String studentorfaculty = params[7];
             String specialNeeds = params[8];
-            //  String dayOfBirth = params[9];
+            String dayOfBirth = params[9];
 
             //System.out.println(email + " " + password + " " + firstName + " " + lastName + " " + zipcode + " " + gender + " " + studentorfaculty + " " + specialNeeds);
 
@@ -72,16 +72,25 @@ public class MYSQLBackgroundTask extends AsyncTask<String,Void,String> {
                         URLEncoder.encode("Zip", "UTF-8") + "=" + URLEncoder.encode(zipcode, "UTF-8") + "&" +
                         URLEncoder.encode("Gender", "UTF-8") + "=" + URLEncoder.encode(gender, "UTF-8") + "&" +
                         URLEncoder.encode("SSM", "UTF-8") + "=" + URLEncoder.encode(studentorfaculty, "UTF-8") + "&" +
-                        URLEncoder.encode("Special", "UTF-8") + "=" + URLEncoder.encode(specialNeeds, "UTF-8");
-                //+ "&" + URLEncoder.encode("Day_Of_Birth", "UTF-8") + "=" + URLEncoder.encode(dayOfBirth, "UTF-8"
+                        URLEncoder.encode("Special", "UTF-8") + "=" + URLEncoder.encode(specialNeeds, "UTF-8") + "&" +
+                        URLEncoder.encode("Day_Of_Birth", "UTF-8") + "=" + URLEncoder.encode(dayOfBirth, "UTF-8");
 
                 bufferWriter.write(dataReg);
                 bufferWriter.flush();
                 bufferWriter.close();
                 OS.close();
-                InputStream IS = httpURLConnection.getInputStream();
-                IS.close();
-                return "Registration Success";
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+                String response = "";
+                String line = "";
+                while((line = bufferedReader.readLine()) != null){
+                    response += line;
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return response;
             } catch (MalformedURLException e){
                 e.printStackTrace();
             } catch (IOException e){
@@ -177,8 +186,9 @@ public class MYSQLBackgroundTask extends AsyncTask<String,Void,String> {
     //Register & login post execute
     @Override
     protected void onPostExecute(String result) {
-        if (result.equals("Registration Success")) {
-            Toast.makeText(ctx, result, Toast.LENGTH_LONG).show();
+        if (result.equals("Registration Successful!")) {
+//            Toast.makeText(ctx, result, Toast.LENGTH_LONG).show();
+              ctx.startActivity(new Intent(ctx, Login.class));
         } else {
             if(result.equals("Login Success")) {
                 ctx.startActivity(new Intent(ctx, CenteralHub.class));
