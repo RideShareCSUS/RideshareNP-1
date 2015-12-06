@@ -5,8 +5,7 @@ android {
         config {
             keyAlias 'MapKey'
             keyPassword '2015teamnp'
-            //storeFile file('C:/Users/anthony/Desktop/RSmapkey.jks')
-            storeFile file('C:/Users/anthony/AndroidStudioProjects/RideshareNP-1/app/src/main/res/GoogleMapKeyStoreRelease/RSmapkey.jks')
+            storeFile file('C:/Users/anthony/AndroidStudioProjects/RideshareNPGroup/app/src/main/res/GoogleMapKeyStoreRelease/RSmapkey.jks')
             storePassword '2015teamnp'
         }
     }

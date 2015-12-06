@@ -68,6 +68,18 @@
             android:name=".TermsOfService"
             android:label="@string/title_activity_terms_of_service" >
         </activity>
+        <activity
+            android:name=".t"
+            android:label="@string/title_activity_t" >
+        </activity>
+        <activity
+            android:name=".ViewProfile"
+            android:label="@string/title_activity_view_profile" >
+        </activity>
+        <activity
+            android:name=".EditProfile"
+            android:label="@string/title_activity_edit_profile" >
+        </activity>
     </application>
 
 </manifest>
