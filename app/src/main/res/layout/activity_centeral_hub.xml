@@ -10,20 +10,13 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
         android:id="@+id/postid"
         android:background="#c3b174"
+        android:text="NEW BUTTON"
+        android:layout_below="@+id/driversearchid"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/mapbutid"
-        android:background="#c3b174"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="75dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -31,10 +24,9 @@
         android:text="New Button"
         android:background="#c3b174"
         android:id="@+id/driversearchid"
-        android:layout_below="@+id/postid"
+        android:layout_alignTop="@+id/ridersearchid"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="60dp" />
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -42,9 +34,9 @@
         android:text="New Button"
         android:background="#c3b174"
         android:id="@+id/ridersearchid"
-        android:layout_alignTop="@+id/driversearchid"
-        android:layout_alignLeft="@+id/mapbutid"
-        android:layout_alignStart="@+id/mapbutid" />
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/mycarpoolbutid"
+        android:layout_alignStart="@+id/mycarpoolbutid" />
 
     <Button
         android:layout_width="wrap_content"
@@ -52,10 +44,10 @@
         android:text="New Button"
         android:background="#c3b174"
         android:id="@+id/viewprofilebut"
-        android:layout_below="@+id/driversearchid"
+        android:layout_alignBaseline="@+id/mycarpoolbutid"
+        android:layout_alignBottom="@+id/mycarpoolbutid"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="89dp" />
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -63,7 +55,7 @@
         android:text="New Button"
         android:background="#c3b174"
         android:id="@+id/editprofilebut"
-        android:layout_alignTop="@+id/viewprofilebut"
+        android:layout_alignTop="@+id/postid"
         android:layout_alignLeft="@+id/ridersearchid"
         android:layout_alignStart="@+id/ridersearchid" />
 
@@ -73,9 +65,8 @@
         android:text="New Button"
         android:background="#c3b174"
         android:id="@+id/mycarpoolbutid"
-        android:layout_below="@+id/viewprofilebut"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="50dp" />
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

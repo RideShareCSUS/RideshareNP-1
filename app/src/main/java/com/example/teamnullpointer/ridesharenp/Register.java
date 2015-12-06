@@ -150,12 +150,19 @@ public class Register extends AppCompatActivity {
         month = (NumberPicker) findViewById(R.id.monthpickid);
         day = (NumberPicker) findViewById(R.id.daypickid);
         year =(NumberPicker) findViewById(R.id.yearpickid);
+
+
         month.setMinValue(1);
         month.setMaxValue(12);
         day.setMinValue(1);
         day.setMaxValue(31);
         year.setMinValue(1);
         year.setMaxValue(2500);
+
+        month.setValue(2);
+        day.setValue(2);
+        year.setValue(2015);
+
         month.setWrapSelectorWheel(false);
         day.setWrapSelectorWheel(false);
         year.setWrapSelectorWheel(false);

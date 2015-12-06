@@ -21,4 +21,6 @@
     <string name="title_activity_user_ratings">UserRatings</string>
     <string name="title_activity_view_profile">ViewProfile</string>
     <string name="title_activity_edit_profile">EditProfile</string>
+    <string name="title_activity_my_carpools">MyCarpools</string>
+    <string name="title_activity_view_carpool">ViewCarpool</string>
 </resources>

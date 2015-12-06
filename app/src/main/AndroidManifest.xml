@@ -38,7 +38,8 @@
         </activity>
         <activity
             android:name=".CenteralHub"
-            android:label="@string/title_activity_centeral_hub" >
+            android:label="@string/title_activity_centeral_hub"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".Post"
@@ -79,6 +80,14 @@
         <activity
             android:name=".EditProfile"
             android:label="@string/title_activity_edit_profile" >
+        </activity>
+        <activity
+            android:name=".MyCarpools"
+            android:label="@string/title_activity_my_carpools" >
+        </activity>
+        <activity
+            android:name=".ViewCarpool"
+            android:label="@string/title_activity_view_carpool" >
         </activity>
     </application>
 

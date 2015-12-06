@@ -71,6 +71,7 @@ public class ViewProfile extends AppCompatActivity {
 
         ArrayAdapter adapter =  new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, myStringArray1);
         comments.setAdapter(adapter);
+        comments.setClickable(false);
     }
 
     //Handle back button
