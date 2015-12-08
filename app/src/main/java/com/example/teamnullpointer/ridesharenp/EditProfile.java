@@ -61,7 +61,12 @@ public class EditProfile extends AppCompatActivity {
         setTitle("Edit Profile");
         ctx = this.getApplicationContext(); //Gets context for start new activities.
 
+        getDataBackground();
         registerRun();
+    }
+
+    private void getDataBackground(){
+
     }
 
     //Runs register

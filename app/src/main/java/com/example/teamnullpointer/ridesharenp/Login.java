@@ -61,7 +61,10 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 if(remembermebox.isChecked()){
                     mydb.restart();
-                    mydb.insertData(emaillogintxt.getText().toString(), passtxt.getText().toString(), "ACPT", "YES", "12345");
+                    mydb.insertData(emaillogintxt.getText().toString(), passtxt.getText().toString(), "ACPT", "YES", "00000");
+                } else {
+                    mydb.restart();
+                    mydb.insertData(emaillogintxt.getText().toString(), passtxt.getText().toString(), "ACPT", "NO", "00000");
                 }
                 startBackgroundTask();
             }
