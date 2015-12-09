@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
         myDB = new DataBaseOperation(this);
         ctx = getApplicationContext();
-        //myDB.restart();   //restarting table testing purposes
+       // myDB.restart();   //restarting table testing purposes (LOCAL)
         tosChecker();
 
     }

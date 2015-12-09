@@ -26,7 +26,7 @@ public class TermsOfService extends AppCompatActivity {
         accept.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 db = new DataBaseOperation(ctx);
-                db.insertData("User", "Pass", "ACPT", "NO"); //Remembers that users accepts TOS
+                db.insertData("User", "Pass", "ACPT", "NO","00000"); //Remembers that users accepts TOS
                 startActivity(new Intent(ctx, Login.class));
             }
         });

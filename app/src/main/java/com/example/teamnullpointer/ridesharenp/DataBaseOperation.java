@@ -16,6 +16,7 @@ public class DataBaseOperation extends SQLiteOpenHelper {
     public static final String COL_2 = "PASSWORD";
     public static final String COL_3 = "TOS";
     public static final String COL_4 = "REMEMBERME";
+    public static final String COL_5 = "MYSQL_DB_ID";
 
 
     public DataBaseOperation(Context context){
@@ -24,7 +25,7 @@ public class DataBaseOperation extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db){
-        db.execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, USERNAME TEXT, PASSWORD TEXT, TOS TEXT, REMEMBERME TEXT)");
+        db.execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, USERNAME TEXT, PASSWORD TEXT, TOS TEXT, REMEMBERME TEXT, MYSQL_DB_ID TEXT)");
     }
 
     @Override
@@ -33,13 +34,14 @@ public class DataBaseOperation extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertData(String username, String password, String tos, String rememberme) {
+    public boolean insertData(String username, String password, String tos, String rememberme, String ider) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_1, username);
         contentValues.put(COL_2, password);
         contentValues.put(COL_3, tos);
         contentValues.put(COL_4, rememberme);
+        contentValues.put(COL_5, ider);
         long result = db.insert(TABLE_NAME, null, contentValues);
         if(result == -1){
             return false;

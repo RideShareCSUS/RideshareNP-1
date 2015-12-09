@@ -4,34 +4,27 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="#FFFFFF"
     tools:context="com.example.teamnullpointer.ridesharenp.CenteralHub">
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
         android:id="@+id/postid"
-        android:layout_marginTop="57dp"
-        android:layout_alignParentTop="true"
+        android:background="#c3b174"
+        android:text="NEW BUTTON"
+        android:layout_below="@+id/driversearchid"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="75dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Button"
-        android:id="@+id/mapbutid"
-        android:layout_above="@+id/driversearchid"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button"
+        android:background="#c3b174"
         android:id="@+id/driversearchid"
-        android:layout_marginTop="44dp"
-        android:layout_below="@+id/postid"
+        android:layout_alignTop="@+id/ridersearchid"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -39,8 +32,41 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Button"
+        android:background="#c3b174"
         android:id="@+id/ridersearchid"
-        android:layout_alignTop="@+id/driversearchid"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/mycarpoolbutid"
+        android:layout_alignStart="@+id/mycarpoolbutid" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button"
+        android:background="#c3b174"
+        android:id="@+id/viewprofilebut"
+        android:layout_alignBaseline="@+id/mycarpoolbutid"
+        android:layout_alignBottom="@+id/mycarpoolbutid"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button"
+        android:background="#c3b174"
+        android:id="@+id/editprofilebut"
+        android:layout_alignTop="@+id/postid"
+        android:layout_alignLeft="@+id/ridersearchid"
+        android:layout_alignStart="@+id/ridersearchid" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button"
+        android:background="#c3b174"
+        android:id="@+id/mycarpoolbutid"
+        android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
 </RelativeLayout>

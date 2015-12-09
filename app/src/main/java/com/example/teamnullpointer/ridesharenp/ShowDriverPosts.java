@@ -1,5 +1,6 @@
 package com.example.teamnullpointer.ridesharenp;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -66,6 +68,16 @@ public class ShowDriverPosts extends AppCompatActivity {
             e.printStackTrace();
         }
 
+    }
+
+
+    private void clicks(){
+        listView.setOnItemClickListener(new ListView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> a, View v, int i, long l) {
+                startActivity(new Intent(getApplicationContext(), ViewCarpool.class));
+            }
+        });
     }
 
     //Handle back button

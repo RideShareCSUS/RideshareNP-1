@@ -26,6 +26,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import java.util.Calendar;
+import java.util.Date;
+
 //Registration page
 
 public class Register extends AppCompatActivity {
@@ -150,12 +153,19 @@ public class Register extends AppCompatActivity {
         month = (NumberPicker) findViewById(R.id.monthpickid);
         day = (NumberPicker) findViewById(R.id.daypickid);
         year =(NumberPicker) findViewById(R.id.yearpickid);
+
+
         month.setMinValue(1);
         month.setMaxValue(12);
         day.setMinValue(1);
         day.setMaxValue(31);
         year.setMinValue(1);
         year.setMaxValue(2500);
+
+        month.setValue(2);
+        day.setValue(2);
+        year.setValue(2015);
+
         month.setWrapSelectorWheel(false);
         day.setWrapSelectorWheel(false);
         year.setWrapSelectorWheel(false);
@@ -165,56 +175,95 @@ public class Register extends AppCompatActivity {
     }
 
     //Extract user info and send to server
-    private void startBackgroundTask(){
+    private void startBackgroundTask() {
         String emailLogin = email.getText().toString();
-        String  passwordLogin = password.getText().toString();
+        String passwordLogin = password.getText().toString();
         String firstName = firstname.getText().toString();
         String lastName = lastname.getText().toString();
-        String  zipcode = zip.getText().toString();
+        String zipcode = zip.getText().toString();
         String theGender = "NA";
         String theSSM = "NA";
         String theSpecial = "NA";
-        String theBirthday = month.getValue() + "/"+ day.getValue() + "/" +  year.getValue();
+        String theBirthday = month.getValue() + "/" + day.getValue() + "/" + year.getValue();
+
+
+        Calendar dob = Calendar.getInstance();
+        Calendar today = Calendar.getInstance();
+
+        dob.set(year.getValue(), month.getValue(), day.getValue());
+
+        int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
+        int day = today.get(Calendar.DAY_OF_MONTH) - dob.get(Calendar.DAY_OF_MONTH);
+
+       // System.out.println("------" + age);
+
 
         int selectedId = gender.getCheckedRadioButtonId();
         chosenButton = (RadioButton) findViewById(selectedId);
-        if(selectedId != -1){
+        if (selectedId != -1) {
             theGender = chosenButton.getText().toString();
         }
 
 
         selectedId = ssm.getCheckedRadioButtonId();
         chosenButton = (RadioButton) findViewById(selectedId);
-        if(selectedId != -1){
+        if (selectedId != -1) {
             theSSM = chosenButton.getText().toString();
         }
 
         selectedId = special.getCheckedRadioButtonId();
         chosenButton = (RadioButton) findViewById(selectedId);
-        if(selectedId != -1){
+        if (selectedId != -1) {
             theSpecial = chosenButton.getText().toString();
         }
 
         //Required
-       if( emailLogin.equals("") || passwordLogin.equals("") || firstName.equals("") || lastName.equals("") || zipcode.equals("") || theSSM.equals("NA")) {
+        if (emailLogin.equals("") || passwordLogin.equals("") || firstName.equals("") || lastName.equals("") || (zipcode).equals("") || theSSM.equals("NA")) {
 
-           AlertDialog.Builder builder1 = new AlertDialog.Builder(Register.this);
-           builder1.setMessage("Please Complete Required Fields:" + "\n\n" + "E-mail" + "\n" + "Password" + "\n" + "First Name" + "\n" + "Last Name" + "\n" + "Zip Code" + "\n" + "Sac State Member" + "\n" + "Day of Birth");
-           builder1.setCancelable(true);
-           builder1.setPositiveButton("Ok",
-                   new DialogInterface.OnClickListener() {
-                       public void onClick(DialogInterface dialog, int id) {
-                           dialog.cancel();
-                       }
-                   });
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(Register.this);
+            builder1.setMessage("Please Complete Required Fields:" + "\n\n" + "E-mail" + "\n" + "Password" + "\n" + "First Name" + "\n" + "Last Name" + "\n" + "Zip Code" + "\n" + "Sac State Member" + "\n" + "Day of Birth");
+            builder1.setCancelable(true);
+            builder1.setPositiveButton("Ok",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
 
-           AlertDialog alert11 = builder1.create();
-           alert11.show();
-       } else {
-           String method = "register";
-           MYSQLBackgroundTask backgroundTask = new MYSQLBackgroundTask(this);
-           backgroundTask.execute(method, emailLogin, passwordLogin, firstName, lastName, zipcode, theGender, theSSM, theSpecial ,theBirthday);
-           //finish();
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+        } else if (age == 17 && day < 0) {  //Check for day in month to be negative (Which means they are still 17, if day >= 0 then they are 18)
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(Register.this);
+            builder1.setMessage("Must 18 & older to sign up!");
+            builder1.setCancelable(true);
+            builder1.setPositiveButton("Ok",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+        } else if(age < 18 && age != 17){ //If less then 18 then deny access.
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(Register.this);
+            builder1.setMessage("Must 18 & older to sign up!");
+            builder1.setCancelable(true);
+            builder1.setPositiveButton("Ok",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+        } else {
+            String method = "register";
+            MYSQLBackgroundTask backgroundTask = new MYSQLBackgroundTask(this);
+            //int zip_int = Integer.parseInt(zipcode);
+            backgroundTask.execute(method, emailLogin, passwordLogin, firstName, lastName,  zipcode, theGender, theSSM, theSpecial ,theBirthday); //zip_int+""
+            //finish();
        }
 
     }

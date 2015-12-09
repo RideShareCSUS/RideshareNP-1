@@ -22,7 +22,7 @@ public class PostDatabaseAdapter extends ArrayAdapter {
 
     public void add(PostDatabase object) {
         super.add(object);
-        list.add(object);
+        list.add(0,object);
     }
 
     @Override

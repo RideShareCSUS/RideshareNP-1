@@ -2,6 +2,7 @@ package com.example.teamnullpointer.ridesharenp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -15,17 +16,21 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 public class Post extends AppCompatActivity {
-    Context ctx;
+    private Context ctx;
 
-    TextView title;
+    private TextView title;
 
-    EditText descript;
+    private EditText descript;
 
-    RadioGroup rd;
-    RadioButton rider, driver;
+    private RadioGroup rd;
+    private RadioButton rider, driver;
 
-    RadioButton chosenButton;
-    Button post;
+    private RadioButton chosenButton;
+    private Button post;
+
+    private DataBaseOperation mydb;
+
+    private String emailToDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +38,7 @@ public class Post extends AppCompatActivity {
         setContentView(R.layout.activity_post);
         setTitle("Post");
         ctx = this.getApplicationContext();
+        mydb = new DataBaseOperation(this);
 
         postRun();
     }
@@ -98,36 +104,28 @@ public class Post extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    //Get email from local database
+    public void getEmail(){
+        Cursor res = mydb.getAllData();
+        Boolean contains = res.moveToNext();
+
+        if(contains == true) {
+            emailToDB = res.getString(1);
+        }
+    }
+
     private void startBackgroundTask(){
         String description = descript.getText().toString();
 
         int selectedId = rd.getCheckedRadioButtonId();
         chosenButton = (RadioButton) findViewById(selectedId);
         String rdtype = chosenButton.getText().toString();
-
-       /*int selectedId = gender.getCheckedRadioButtonId();
-       chosenButton = (RadioButton) findViewById(selectedId);
-       String theGender = chosenButton.getText().toString();
-
-       selectedId = ssm.getCheckedRadioButtonId();
-       chosenButton = (RadioButton) findViewById(selectedId);
-       String theSSM = chosenButton.getText().toString();*/
-
-       /*String theSpecial = "";
-       selectedId = special.getCheckedRadioButtonId();
-       if(selectedId != -1) {
-           chosenButton = (RadioButton) findViewById(selectedId);
-           theSpecial = chosenButton.getText().toString();
-       } else {
-           theSpecial = "No";
-       }*/
-
-        //System.out.println(emailLogin + " " + passwordLogin + " " + firstName + " " + lastName + " " + zipcode + " " + theGender + " " + theSSM + " " + theSpecial);
-
+        getEmail();
 
         String method = "post";
         MYSQLBackgroundTask backgroundTask = new MYSQLBackgroundTask(this);
-        backgroundTask.execute(method, description,rdtype);
+        backgroundTask.execute(method, description,rdtype,emailToDB);
         finish();
 
     }

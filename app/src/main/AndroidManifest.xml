@@ -38,7 +38,8 @@
         </activity>
         <activity
             android:name=".CenteralHub"
-            android:label="@string/title_activity_centeral_hub" >
+            android:label="@string/title_activity_centeral_hub"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".Post"
@@ -61,12 +62,28 @@
             android:value="AIzaSyD-EJ1oZfwxIfQzJ8ZhTZLoZyQACqEg9_w" />
 
         <activity
-            android:name=".Maps"
-            android:label="@string/title_activity_maps" >
-        </activity>
-        <activity
             android:name=".TermsOfService"
             android:label="@string/title_activity_terms_of_service" >
+        </activity>
+        <activity
+            android:name=".t"
+            android:label="@string/title_activity_t" >
+        </activity>
+        <activity
+            android:name=".ViewProfile"
+            android:label="@string/title_activity_view_profile" >
+        </activity>
+        <activity
+            android:name=".EditProfile"
+            android:label="@string/title_activity_edit_profile" >
+        </activity>
+        <activity
+            android:name=".MyCarpools"
+            android:label="@string/title_activity_my_carpools" >
+        </activity>
+        <activity
+            android:name=".ViewCarpool"
+            android:label="@string/title_activity_view_carpool" >
         </activity>
     </application>
 
