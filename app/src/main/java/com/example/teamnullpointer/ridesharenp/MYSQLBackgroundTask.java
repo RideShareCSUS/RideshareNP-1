@@ -74,7 +74,7 @@ public class MYSQLBackgroundTask extends AsyncTask<String,Void,String> {
                         URLEncoder.encode("Gender", "UTF-8") + "=" + URLEncoder.encode(gender, "UTF-8") + "&" +
                         URLEncoder.encode("SSM", "UTF-8") + "=" + URLEncoder.encode(studentorfaculty, "UTF-8") + "&" +
                         URLEncoder.encode("Special", "UTF-8") + "=" + URLEncoder.encode(specialNeeds, "UTF-8") + "&" +
-                        URLEncoder.encode("Day_Of_Birth", "UTF-8") + "=" + URLEncoder.encode(dayOfBirth, "UTF-8"); /* + "&" +
+                        URLEncoder.encode("Day_Of_Birth", "UTF-8") + "=" + URLEncoder.encode(dayOfBirth, "UTF-8");  /*+ "&" +
                         URLEncoder.encode("Rating", "UTF-8") + "=" + URLEncoder.encode(userrating, "UTF-8");*/
 
 
@@ -145,6 +145,7 @@ public class MYSQLBackgroundTask extends AsyncTask<String,Void,String> {
             //Post
             String description = params[1];
             String rdtype = params[2];
+            String email = params[3];
 
             try {
                 URL url = new URL(post_url);
@@ -154,8 +155,10 @@ public class MYSQLBackgroundTask extends AsyncTask<String,Void,String> {
                 httpURLConnection.setDoInput(true);
                 OutputStream OS = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(OS,"UTF-8"));
-                String dataLogin = URLEncoder.encode("Description", "UTF-8") +"="+URLEncoder.encode(description, "UTF-8")+"&"+
-                        URLEncoder.encode("RDType", "UTF-8") + "=" +URLEncoder.encode(rdtype, "UTF-8");
+                String dataLogin = URLEncoder.encode("Description", "UTF-8") +"="+URLEncoder.encode(description, "UTF-8") +"&"+
+                        URLEncoder.encode("RDType", "UTF-8") + "=" +URLEncoder.encode(rdtype, "UTF-8") +"&"+
+                        URLEncoder.encode("Email", "UTF-8") + "=" +URLEncoder.encode(email, "UTF-8");
+
                 bufferedWriter.write(dataLogin);
                 bufferedWriter.flush();
                 bufferedWriter.close();
