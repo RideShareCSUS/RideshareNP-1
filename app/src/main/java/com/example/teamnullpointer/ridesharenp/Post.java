@@ -125,7 +125,7 @@ public class Post extends AppCompatActivity {
 
         String method = "post";
         MYSQLBackgroundTask backgroundTask = new MYSQLBackgroundTask(this);
-        backgroundTask.execute(method, description,rdtype,emailToDB);
+        backgroundTask.execute(method,description,rdtype,emailToDB);
         finish();
 
     }

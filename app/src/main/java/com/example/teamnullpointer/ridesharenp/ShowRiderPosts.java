@@ -1,5 +1,6 @@
 package com.example.teamnullpointer.ridesharenp;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,10 +8,12 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -54,10 +57,12 @@ public class ShowRiderPosts extends AppCompatActivity {
             int count = 0;
             jsonArray = jsonObject.getJSONArray("server_response");
             String description;
+            String email;
             while(count<jsonArray.length()) {
                 JSONObject JO = jsonArray.getJSONObject(count);
                 description = JO.getString("description");
-                PostDatabase postdatabase = new PostDatabase(description);
+                email = JO.getString("email");
+                PostDatabase postdatabase = new PostDatabase(description, email);
                 postdatabaseadapter.add(postdatabase);
                 count++;
             }
@@ -65,7 +70,22 @@ public class ShowRiderPosts extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        clicks();
+    }
 
+
+    private void clicks(){
+        listView.setOnItemClickListener(new ListView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> a, View v, int position, long l) {
+                String method = "Profile";
+                MYSQLBackgroundTask backgroundTask = new MYSQLBackgroundTask(getApplicationContext());
+                backgroundTask.execute(postdatabaseadapter.getRowEmail(position));
+
+                Toast toast = Toast.makeText(getApplicationContext(), postdatabaseadapter.getRowInfo(position) + " " + postdatabaseadapter.getRowEmail(position), Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
     }
 
     //Handle back button
@@ -77,25 +97,4 @@ public class ShowRiderPosts extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_show_rider_posts, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }

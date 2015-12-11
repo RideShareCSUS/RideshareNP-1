@@ -2,6 +2,7 @@ package com.example.teamnullpointer.ridesharenp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -24,21 +25,34 @@ import java.net.URL;
 public class CenteralHub extends AppCompatActivity {
     private Button postbut, driverbut, riderbut, mapbut, viewprofilebut, editprofilebut, mycarpoolbut;
     private Context ctx;
-   // private DataBaseOperation mydb; //Local DB
+    private String userEmail;
+    private DataBaseOperation mydb; //Local DB
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_centeral_hub);
-        setTitle("Hello John Smith");
+
         ctx = this.getApplicationContext();
+        mydb = new DataBaseOperation(ctx);
 
         centralHubRun();
+        setTitle(userEmail);
     }
 
     private void centralHubRun(){
         centralLayout();
         centralClick();
+        getEmail();
+    }
+
+    public void getEmail(){
+        Cursor res = mydb.getAllData();
+        Boolean contains = res.moveToNext();
+
+        if(contains == true) {
+            userEmail = res.getString(1);
+        }
     }
 
     private void centralLayout() {
@@ -189,13 +203,13 @@ public class CenteralHub extends AppCompatActivity {
         viewprofilebut.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                /*class startBackgroundTask extends AsyncTask<Void, Void, String> {
+                class startBackgroundTask extends AsyncTask<Void, Void, String> {
 
                     String json_url;
                     String json_string;
                     @Override
                     protected void onPreExecute() {
-                       // json_url = "http://athena.ecs.csus.edu/~wonge/rideshare/json_get_data_rider.php";
+                       json_url = "http://athena.ecs.csus.edu/~wonge/rideshare/json_get_data_profile.php";
                     }
 
                     @Override
@@ -231,13 +245,11 @@ public class CenteralHub extends AppCompatActivity {
                         // TextView textView = (TextView) findViewById(R.id.textView);
                         // textView.setText(result);
                         json_string = result;
-                        Intent intent = new Intent(ctx, ShowRiderPosts.class);
+                        Intent intent = new Intent(ctx, ViewProfile.class);
                         intent.putExtra("json_data",json_string);
                         startActivity(intent);
                     }
                 }
-                */
-                startActivity(new Intent(ctx, ViewProfile.class));
 
             }
 
