@@ -52,16 +52,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="Avaliablity: Driver/Rider"
-                    android:id="@+id/avalitxtid"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/spectxtid"
-                    android:layout_alignParentLeft="true" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="CSUS Status: Student"
                     android:id="@+id/csusstatusid"
                     android:layout_alignParentStart="true"
@@ -75,8 +65,8 @@
                     android:text="Gender: Male"
                     android:id="@+id/gendertxtid"
                     android:layout_alignParentStart="true"
-                    android:layout_below="@+id/avalitxtid"
-                    android:layout_alignParentLeft="true" />
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/spectxtid" />
 
                 <TextView
                     android:layout_width="wrap_content"

@@ -9,20 +9,19 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-/**
- * Created by eric on 11/15/15.
- */
+
+
 public class PostDatabaseAdapter extends ArrayAdapter {
     List list = new ArrayList();
+
     public PostDatabaseAdapter(Context context, int resource) {
         super(context, resource);
     }
 
     public void add(PostDatabase object) {
         super.add(object);
-        list.add(0,object);
+        list.add(0, object);
     }
 
     @Override
@@ -40,6 +39,7 @@ public class PostDatabaseAdapter extends ArrayAdapter {
         View row;
         row = convertView;
         PostDatabaseHolder postdatabaseholder;
+
         if (row == null) {
             LayoutInflater layoutInflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             row = layoutInflater.inflate(R.layout.row_layout,parent,false);
@@ -52,8 +52,20 @@ public class PostDatabaseAdapter extends ArrayAdapter {
 
         PostDatabase postdatabase = (PostDatabase) this.getItem(position);
         postdatabaseholder.tx_description.setText(postdatabase.getDescription());
+
         return row;
     }
+
+    public String getRowInfo(int position) {
+        PostDatabase postdatabase = (PostDatabase) this.getItem(position);
+        return postdatabase.getDescription();
+    }
+
+    public String getRowEmail(int position){
+        PostDatabase postdatabase = (PostDatabase) this.getItem(position);
+        return postdatabase.getIDEmail();
+    }
+
 
     static class PostDatabaseHolder {
         TextView tx_description;
