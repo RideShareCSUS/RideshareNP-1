@@ -66,10 +66,6 @@
             android:label="@string/title_activity_terms_of_service" >
         </activity>
         <activity
-            android:name=".t"
-            android:label="@string/title_activity_t" >
-        </activity>
-        <activity
             android:name=".ViewProfile"
             android:label="@string/title_activity_view_profile" >
         </activity>
@@ -84,6 +80,10 @@
         <activity
             android:name=".ViewCarpool"
             android:label="@string/title_activity_view_carpool" >
+        </activity>
+        <activity
+            android:name=".Messenger"
+            android:label="@string/title_activity_messenger" >
         </activity>
     </application>
 
