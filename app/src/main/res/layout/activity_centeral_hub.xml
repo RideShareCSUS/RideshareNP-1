@@ -13,10 +13,10 @@
         android:id="@+id/postid"
         android:background="#c3b174"
         android:text="NEW BUTTON"
+        android:layout_marginTop="56dp"
         android:layout_below="@+id/driversearchid"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="75dp" />
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -44,8 +44,7 @@
         android:text="New Button"
         android:background="#c3b174"
         android:id="@+id/viewprofilebut"
-        android:layout_alignBaseline="@+id/mycarpoolbutid"
-        android:layout_alignBottom="@+id/mycarpoolbutid"
+        android:layout_alignTop="@+id/mycarpoolbutid"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 

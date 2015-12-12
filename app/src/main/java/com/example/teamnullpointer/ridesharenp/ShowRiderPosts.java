@@ -20,36 +20,55 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ShowRiderPosts extends AppCompatActivity {
     private ListView listview;
     private List<String> list_file;
-    String json_string;
-    JSONObject jsonObject;
-    JSONArray jsonArray;
-    PostDatabaseAdapter postdatabaseadapter;
-    ListView listView;
-    Button refreshbut;
+    private String json_string;
+    private JSONObject jsonObject;
+    private JSONArray jsonArray;
+    private PostDatabaseAdapter postdatabaseadapter;
+    private ListView listView;
+
+    //Retrieve database info
+    private String profile_url = "http://athena.ecs.csus.edu/~wonge/rideshare/json_get_data_profile.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_rider_posts);
-        setTitle("Riders");
 
+        run();
+
+    }
+
+    private void run(){
+        layout();
+        retrievePosts();
+        clicks();
+    }
+
+    private void layout(){
         listView = (ListView) findViewById(R.id.listviewid);
-        refreshbut = (Button) findViewById(R.id.refreshbutid);
-        refreshbut.setText("Refresh");
         postdatabaseadapter = new PostDatabaseAdapter(this,R.layout.row_layout);
         listView.setAdapter(postdatabaseadapter);
+
+        setTitle("Riders");
+    }
+
+    private void retrievePosts(){
         json_string = getIntent().getExtras().getString("json_data");
 
         try {
@@ -70,20 +89,84 @@ public class ShowRiderPosts extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        clicks();
     }
 
 
     private void clicks(){
+
+
         listView.setOnItemClickListener(new ListView.OnItemClickListener() {
+            String email;
+
             @Override
             public void onItemClick(AdapterView<?> a, View v, int position, long l) {
-                String method = "Profile";
-                MYSQLBackgroundTask backgroundTask = new MYSQLBackgroundTask(getApplicationContext());
-                backgroundTask.execute(postdatabaseadapter.getRowEmail(position));
 
-                Toast toast = Toast.makeText(getApplicationContext(), postdatabaseadapter.getRowInfo(position) + " " + postdatabaseadapter.getRowEmail(position), Toast.LENGTH_SHORT);
-                toast.show();
+                email = postdatabaseadapter.getRowEmail(position);
+                new startBackgroundTask().execute();
+
+            }
+
+            class startBackgroundTask extends AsyncTask<Void, Void, String> {
+
+                String json_url;
+                String json_string;
+
+                @Override
+                protected void onPreExecute() {
+                    json_url = profile_url;
+                }
+
+                @Override
+                protected String doInBackground(Void... voids) {
+                    String JSON_STRING;
+                    try {
+                        URL url = new URL(profile_url);
+                        HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                        httpURLConnection.setRequestMethod("POST");
+                        httpURLConnection.setDoOutput(true);
+                        httpURLConnection.setDoInput(true);
+                        OutputStream OS = httpURLConnection.getOutputStream();
+                        BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(OS, "UTF-8"));
+                        String emailsend = URLEncoder.encode("Email", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8");
+
+                        bufferedWriter.write(emailsend);
+                        bufferedWriter.flush();
+                        bufferedWriter.close();
+                        OS.close();
+
+
+                        InputStream inputStream = httpURLConnection.getInputStream();
+                        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+
+                        StringBuilder stringBuilder = new StringBuilder();
+                        while ((JSON_STRING = bufferedReader.readLine()) != null) {
+                            stringBuilder.append(JSON_STRING + "\n");
+                        }
+                        bufferedReader.close();
+                        inputStream.close();
+                        httpURLConnection.disconnect();
+                        return stringBuilder.toString().trim();
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    return "FAILED";
+
+                }
+
+                @Override
+                protected void onProgressUpdate(Void... values) {
+                    super.onProgressUpdate(values);
+                }
+
+                @Override
+                protected void onPostExecute(String result) {
+                    json_string = result;
+                    Intent intent = new Intent(getApplicationContext(), ViewProfile.class);
+                    intent.putExtra("json_data", json_string);
+                    startActivity(intent);
+                }
             }
         });
     }

@@ -3,8 +3,11 @@ package com.example.teamnullpointer.ridesharenp;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -17,6 +20,24 @@ import android.widget.NumberPicker;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.Calendar;
 
 public class EditProfile extends AppCompatActivity {
     private Context ctx;
@@ -52,6 +73,15 @@ public class EditProfile extends AppCompatActivity {
     private Button enterbut;
 
 
+    //Retrieve database info
+    private String profile_url = "http://athena.ecs.csus.edu/~wonge/rideshare/json_get_data_profile.php";
+
+    private String json_string;
+    private JSONObject jsonObject;
+    private JSONArray jsonArray;
+
+    private String  genderGet, ssmGet, specGet, dobGet, monGet, dayGet, yearGet, emailGet;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,11 +91,67 @@ public class EditProfile extends AppCompatActivity {
         setTitle("Edit Profile");
         ctx = this.getApplicationContext(); //Gets context for start new activities.
 
-        getDataBackground();
         registerRun();
+        fill();
     }
 
-    private void getDataBackground(){
+    private void fill(){
+        json_string = getIntent().getExtras().getString("json_data");
+
+
+        try {
+            jsonObject = new JSONObject(json_string);
+            int count = 0;
+            jsonArray = jsonObject.getJSONArray("server_response");
+
+            while(count<jsonArray.length()) {
+                JSONObject JO = jsonArray.getJSONObject(count);
+
+                password.setText(JO.getString("pass"));
+                zip.setText(JO.getString("zip"));
+
+                genderGet = JO.getString("gender");
+                if(!genderGet.equals("NA")){
+                    if(genderGet.equals("Male")) {
+                        gender.check(R.id.radiomaleid);
+                    } else if(genderGet.equals("Female")){
+                        gender.check(R.id.radiofemaleid);
+                    } else {
+                        gender.check(R.id.radiootherid);
+                    }
+                }
+
+                ssmGet = JO.getString("ssm");
+                if(!ssmGet.equals("NA")) {
+                    if (ssmGet.equals("Student")) {
+                        ssm.check(R.id.radiostudentid);
+                    } else if (ssmGet.equals("Faculty")) {
+                        ssm.check(R.id.radiofacid);
+                    }
+                }
+
+                specGet = JO.getString("special");
+                if(!specGet.equals("NA")) {
+                    if (specGet.equals("Yes")) {
+                        special.check(R.id.radioyesspecialid);
+                    } else if (specGet.equals("No")) {
+                        special.check(R.id.radionospecialid);
+                    }
+                }
+
+                dobGet = JO.getString("DOB");
+                extractDOB(dobGet);
+
+                emailGet = JO.getString("email");
+
+                count++;
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
 
     }
 
@@ -136,6 +222,7 @@ public class EditProfile extends AppCompatActivity {
         day.setWrapSelectorWheel(false);
         year.setWrapSelectorWheel(false);
 
+
         enterbut = (Button) findViewById(R.id.enterbutid);
         enterbut.setText("Enter");
     }
@@ -148,6 +235,40 @@ public class EditProfile extends AppCompatActivity {
             finish();
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+
+    public void extractDOB(String dobGet ){
+
+        int ct = 0;
+        int sep = 0;
+        String ch = "";
+        String appen = "";
+        while(ct < dobGet.length()){
+            ch = dobGet.charAt(ct)+"";
+            if(ch.equals("/")){
+                sep++;
+            }
+
+            if(sep == 1 && ch.equals("/")){
+                monGet = appen;
+                appen = "";
+                ch = "";
+            } else if(sep == 2 && ch.equals("/")){
+                dayGet = appen;
+                appen = "";
+                ch = "";
+            }
+
+            appen += ch;
+            ct++;
+        }
+
+        yearGet = appen;
+
+        month.setValue(Integer.parseInt(monGet));
+        day.setValue(Integer.parseInt(dayGet));
+        year.setValue(Integer.parseInt(yearGet));
     }
 
     //Handles user text field & button action
@@ -164,10 +285,18 @@ public class EditProfile extends AppCompatActivity {
     private void startBackgroundTask(){
         String  passwordLogin = password.getText().toString();
         String  zipcode = zip.getText().toString();
-        String theGender;
-        String theSSM;
-        String theSpecial;
+        String theGender = "NA";
+        String theSSM = "NA";
+        String theSpecial = "NA";
         String theBirthday = month.getValue() + "/"+ day.getValue() + "/" +  year.getValue();
+
+        Calendar dob = Calendar.getInstance();
+        Calendar today = Calendar.getInstance();
+
+        dob.set(year.getValue(), month.getValue(), day.getValue());
+
+        int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
+        int day = today.get(Calendar.DAY_OF_MONTH) - dob.get(Calendar.DAY_OF_MONTH);
 
         int selectedId = gender.getCheckedRadioButtonId();
         chosenButton = (RadioButton) findViewById(selectedId);
@@ -188,11 +317,55 @@ public class EditProfile extends AppCompatActivity {
             theSpecial = chosenButton.getText().toString();
         }
 
-        //NEED TO FILL WHEN OPEN
-       // String method = "edit";
-       // MYSQLBackgroundTask backgroundTask = new MYSQLBackgroundTask(this);
-        //backgroundTask.execute(method, passwordLogin, zipcode, theGender, theSSM, theSpecial ,theBirthday);
-        //finish();
+        //Required
+        if (passwordLogin.equals("") ||  (zipcode).equals("") || theSSM.equals("NA")) {
+
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(EditProfile.this);
+            builder1.setMessage("Please Complete Required Fields:" + "\n\n" + "E-mail" + "\n" + "Password" + "\n" + "First Name" + "\n" + "Last Name" + "\n" + "Zip Code" + "\n" + "Sac State Member" + "\n" + "Day of Birth");
+            builder1.setCancelable(true);
+            builder1.setPositiveButton("Ok",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+        } else if (age == 17 && day < 0) {  //Check for day in month to be negative (Which means they are still 17, if day >= 0 then they are 18)
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(EditProfile.this);
+            builder1.setMessage("Must 18 & older to sign up!");
+            builder1.setCancelable(true);
+            builder1.setPositiveButton("Ok",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+        } else if(age < 18 && age != 17) { //If less then 18 then deny access.
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(EditProfile.this);
+            builder1.setMessage("Must 18 & older to sign up!");
+            builder1.setCancelable(true);
+            builder1.setPositiveButton("Ok",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+        } else {
+
+            //NEED TO FILL WHEN OPEN
+            String method = "edit";
+            MYSQLBackgroundTask backgroundTask = new MYSQLBackgroundTask(this);
+            backgroundTask.execute(method, passwordLogin, zipcode, theGender, theSSM, theSpecial, theBirthday, emailGet + "");
+            finish();
+        }
     }
 
 }

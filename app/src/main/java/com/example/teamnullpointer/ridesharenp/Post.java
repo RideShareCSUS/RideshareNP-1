@@ -75,7 +75,7 @@ public class Post extends AppCompatActivity {
         descript = (EditText) findViewById(R.id.descriptid);
         post = (Button) findViewById(R.id.postid);
 
-        title.setText("Choose to post as...");
+        title.setText("Posting Details");
         driver.setText("Driver");
         rider.setText("Rider");
         post.setText("Post");

@@ -29,8 +29,8 @@
 
 
             <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="478dp">
+                android:layout_width="wrap_content"
+                android:layout_height="509dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -54,9 +54,9 @@
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="CSUS Status: Student"
                     android:id="@+id/csusstatusid"
-                    android:layout_alignParentStart="true"
                     android:layout_below="@+id/gendertxtid"
-                    android:layout_alignParentLeft="true" />
+                    android:layout_alignLeft="@+id/ratingbarid"
+                    android:layout_alignStart="@+id/ratingbarid" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -64,9 +64,9 @@
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="Gender: Male"
                     android:id="@+id/gendertxtid"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_below="@+id/spectxtid" />
+                    android:layout_below="@+id/spectxtid"
+                    android:layout_alignLeft="@+id/csusstatusid"
+                    android:layout_alignStart="@+id/csusstatusid" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -75,15 +75,16 @@
                     android:text="Special Accommodations: Yes"
                     android:id="@+id/spectxtid"
                     android:layout_below="@+id/ratingbarid"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true" />
+                    android:layout_alignLeft="@+id/gendertxtid"
+                    android:layout_alignStart="@+id/gendertxtid" />
+
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="\nComments:"
-                    android:id="@+id/textView2"
+                    android:id="@+id/commenttitleid"
                     android:layout_below="@+id/csusstatusid"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true" />
@@ -92,9 +93,22 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/commentsid"
-                    android:layout_below="@+id/textView2"
+                    android:layout_below="@+id/commenttitleid"
+                    android:layout_alignParentBottom="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Message"
+                    android:id="@+id/msgbutid"
+                    android:background="#c3b174"
+                    android:layout_below="@+id/spectxtid"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+
+
 
             </RelativeLayout>
 

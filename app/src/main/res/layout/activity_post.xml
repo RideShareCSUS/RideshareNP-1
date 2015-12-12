@@ -29,19 +29,23 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Choose to post as..."
+                    android:text="Choose Post Details"
                     android:id="@+id/titleid"
                     android:gravity="center"
-                    android:layout_centerHorizontal="true"
-                    android:layout_gravity="center_horizontal" />
+                    android:layout_gravity="center_horizontal"
+                    android:layout_alignTop="@+id/postgroupid"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
 
                 <RadioGroup
                     android:id="@+id/postgroupid"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:layout_toLeftOf="@+id/titleid"
-                    android:layout_toStartOf="@+id/titleid">
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="41dp">
 
 
                     <RadioButton
@@ -71,20 +75,23 @@
                     android:inputType="textMultiLine"
                     android:ems="10"
                     android:maxLength="45"
+                    android:height="200dp"
                     android:id="@+id/descriptid"
-                    android:layout_above="@+id/postid"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="53dp" />
+                    android:layout_below="@+id/postgroupid"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="New Button"
                     android:id="@+id/postid"
+                    android:background="#c3b174"
                     android:layout_gravity="center_horizontal"
                     android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="46dp" />
+                    android:layout_centerHorizontal="true" />
 
             </RelativeLayout>
 

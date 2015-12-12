@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,7 +20,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class ViewProfile extends AppCompatActivity {
-    private TextView title, spec, aval, gender, ssm;
+    private TextView title, spec, gender, ssm;
 
     private RatingBar ratebar;
 
@@ -32,8 +33,8 @@ public class ViewProfile extends AppCompatActivity {
     JSONArray jsonArray;
 
     //Retieve these form database
-    private String nameGet, specGet, genderGet, ssmGet;
-    private double user_ratingGet;
+    private String firstnameGet, lastnameGet, specGet, genderGet, ssmGet;
+    private float user_ratingGet = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,19 +46,21 @@ public class ViewProfile extends AppCompatActivity {
 
         json_string = getIntent().getExtras().getString("json_data");
 
+
         try {
             jsonObject = new JSONObject(json_string);
             int count = 0;
             jsonArray = jsonObject.getJSONArray("server_response");
 
+
             while(count<jsonArray.length()) {
                 JSONObject JO = jsonArray.getJSONObject(count);
-                nameGet = JO.getString("name");
-                specGet = JO.getString("email");
+
+                firstnameGet = JO.getString("first");
+                lastnameGet = JO.getString("last");
                 genderGet = JO.getString("gender");
                 ssmGet = JO.getString("ssm");
-
-                //System.out.println("----" + nameGet + specGet + genderGet);
+                specGet = JO.getString("special");
 
                 count++;
             }
@@ -65,6 +68,8 @@ public class ViewProfile extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+
 
         registerRun();
 
@@ -76,22 +81,21 @@ public class ViewProfile extends AppCompatActivity {
     }
 
     private void layout(){
-        title = (TextView) findViewById(R.id.titleid);
+        title = (TextView) findViewById(R.id.usernametitleid);
         spec = (TextView) findViewById(R.id.spectxtid);
-        //aval = (TextView) findViewById(R.id.avalitxtid);
         gender = (TextView) findViewById(R.id.gendertxtid);
         ssm = (TextView) findViewById(R.id.csusstatusid);
 
         ratebar = (RatingBar) findViewById(R.id.ratingbarid);
         comments = (ListView) findViewById(R.id.commentsid);
 
-        title.setText(nameGet);
-        spec.setText("Special Accommodations: " + specGet);
-        gender.setText("Gender: " + genderGet);
-        ssm.setText("CSUS Status: " + ssmGet);
+        title.setText(firstnameGet + " " + lastnameGet);
+        spec.setText("Special Accommodations - " + specGet);
+        gender.setText("Gender - " + genderGet);
+        ssm.setText("CSUS Status - " + ssmGet);
 
 
-        //ratebar.setRating(user_rating);
+        ratebar.setRating(user_ratingGet);
 
         //TEST
         ArrayList<String> myStringArray1 = new ArrayList<String>();

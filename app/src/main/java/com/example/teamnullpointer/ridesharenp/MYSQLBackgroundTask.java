@@ -26,7 +26,7 @@ public class MYSQLBackgroundTask extends AsyncTask<String,Void,String> {
     private String reg_url =  "http://athena.ecs.csus.edu/~wonge/rideshare/register.php";
     private String login_url = "http://athena.ecs.csus.edu/~wonge/rideshare/login.php";
     private String post_url = "http://athena.ecs.csus.edu/~wonge/rideshare/post.php";
-    private String profile_url = "http://athena.ecs.csus.edu/~wonge/rideshare/json_get_data_profile.php";
+    private String edit_url = "http://athena.ecs.csus.edu/~wonge/rideshare/edit.php";
 
     //LOCAL server url
     //private String reg_url = "http://10.0.2.2/RideshareMysql/register.php";
@@ -183,23 +183,33 @@ public class MYSQLBackgroundTask extends AsyncTask<String,Void,String> {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        } else if (method.equals("edit")) {
+            String password = params[1];
+            String zipcode = params[2];
+            String gender = params[3];
+            String ssm = params[4];
+            String spec = params[5];
+            String dob = params[6];
+            String email = params[7];
 
-        } else if (method.equals("Profile")) {
-            //Post
-            String email = params[1];
-            System.out.println("-----" + email);
 
             try {
-                URL url = new URL(profile_url);
+                URL url = new URL(edit_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setDoInput(true);
                 OutputStream OS = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(OS,"UTF-8"));
-                String emailsend = URLEncoder.encode("Email", "UTF-8") +"="+URLEncoder.encode(email, "UTF-8");
+                String dataLogin = URLEncoder.encode("Password", "UTF-8") +"="+URLEncoder.encode(password, "UTF-8") +"&"+
+                        URLEncoder.encode("Zip", "UTF-8") + "=" +URLEncoder.encode(zipcode, "UTF-8") +"&"+
+                        URLEncoder.encode("Gender", "UTF-8") + "=" +URLEncoder.encode(gender, "UTF-8") +"&"+
+                        URLEncoder.encode("SSM", "UTF-8") + "=" +URLEncoder.encode(ssm, "UTF-8") +"&"+
+                        URLEncoder.encode("Special", "UTF-8") + "=" +URLEncoder.encode(spec, "UTF-8") +"&"+
+                        URLEncoder.encode("Day_Of_Birth", "UTF-8") + "=" +URLEncoder.encode(dob, "UTF-8") +"&"+
+                        URLEncoder.encode("Email", "UTF-8") + "=" +URLEncoder.encode(email, "UTF-8");
 
-                bufferedWriter.write(emailsend);
+                bufferedWriter.write(dataLogin);
                 bufferedWriter.flush();
                 bufferedWriter.close();
                 OS.close();
@@ -222,7 +232,6 @@ public class MYSQLBackgroundTask extends AsyncTask<String,Void,String> {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
         }
         return "fail";
     }
@@ -236,16 +245,14 @@ public class MYSQLBackgroundTask extends AsyncTask<String,Void,String> {
     @Override
     protected void onPostExecute(String result) {
         if (result.equals("Registration Successful!")) {
-//            Toast.makeText(ctx, result, Toast.LENGTH_LONG).show();
-              ctx.startActivity(new Intent(ctx, Login.class));
+            ctx.startActivity(new Intent(ctx, Login.class));
         } else {
             if(result.equals("Login Success")) {
                 ctx.startActivity(new Intent(ctx, CenteralHub.class));
             } else {
-                Toast.makeText(ctx, "HI",Toast.LENGTH_LONG).show();
+                Toast.makeText(ctx, result,Toast.LENGTH_LONG).show();
             }
         }
 
     }
-
 }
