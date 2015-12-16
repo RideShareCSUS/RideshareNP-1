@@ -2,6 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.teamnullpointer.ridesharenp.CenteralHub">
-    <item android:id="@+id/action_settings" android:title="@string/action_settings"
+    <item android:id="@+id/logoutmenuid" android:title="Logout"
         android:orderInCategory="100" app:showAsAction="never" />
+
 </menu>
