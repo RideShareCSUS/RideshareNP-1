@@ -12,10 +12,6 @@ import java.util.ArrayList;
 import pojo.Message;
 import com.example.teamnullpointer.ridesharenp.R;
 
-/**
- * Created by Anjith Sasindran
- * on 11-Oct-15.
- */
 public class ChatAdapter extends RecyclerView.Adapter<ChatViewHolder> {
 
     ArrayList<String> chatMessageList;

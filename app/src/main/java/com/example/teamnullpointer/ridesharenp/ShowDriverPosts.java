@@ -207,6 +207,4 @@ public class ShowDriverPosts extends AppCompatActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
-
-
 }
