@@ -89,6 +89,10 @@
             android:name=".MyProfile"
             android:label="@string/title_activity_my_profile" >
         </activity>
+        <activity
+            android:name=".Search"
+            android:label="Search">
+        </activity>
     </application>
 
 </manifest>

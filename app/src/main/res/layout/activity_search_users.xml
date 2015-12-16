@@ -6,26 +6,16 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.example.teamnullpointer.ridesharenp.Search">
 
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/listviewid"
-        android:scrollbars="vertical"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="false"
-        android:layout_below="@+id/searchUserText" />
-
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/searchUserText"
-        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/searchBut"
-        android:layout_toStartOf="@+id/searchBut" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:imeOptions="actionDone"/>
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -33,8 +23,8 @@
         android:layout_height="wrap_content"
         android:text="New Button"
         android:id="@+id/searchBut"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/listviewid"
-        android:layout_alignEnd="@+id/listviewid" />
+        android:layout_below="@+id/searchUserText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="31dp" />
 
 </RelativeLayout>
