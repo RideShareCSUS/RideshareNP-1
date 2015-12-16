@@ -23,4 +23,10 @@
     <string name="title_activity_edit_profile">EditProfile</string>
     <string name="title_activity_my_carpools">MyCarpools</string>
     <string name="title_activity_view_carpool">ViewCarpool</string>
+    <string name="title_activity_messenger">Messenger</string>
+    <string name="username">Username (Max 10 chars)</string>
+    <string name="login">Login</string>
+    <string name="logout">Logout</string>
+    <string name="send">Send</string>
+    <string name="title_activity_my_profile">MyProfile</string>
 </resources>

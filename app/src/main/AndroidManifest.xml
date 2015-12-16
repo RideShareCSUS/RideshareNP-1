@@ -85,6 +85,10 @@
             android:name=".Messenger"
             android:label="@string/title_activity_messenger" >
         </activity>
+        <activity
+            android:name=".MyProfile"
+            android:label="@string/title_activity_my_profile" >
+        </activity>
     </application>
 
 </manifest>

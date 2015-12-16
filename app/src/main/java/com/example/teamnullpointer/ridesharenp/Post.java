@@ -3,17 +3,36 @@ package com.example.teamnullpointer.ridesharenp;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.support.v4.app.Fragment;
+
+import keys.PubnubKeys;
+
+import com.google.gson.Gson;
+import com.pubnub.api.Callback;
+import com.pubnub.api.Pubnub;
+import com.pubnub.api.PubnubError;
+import com.pubnub.api.PubnubException;
+
+
+import com.pubnub.api.Pubnub;
+
+import keys.PubnubKeys;
 
 public class Post extends AppCompatActivity {
     private Context ctx;
@@ -31,6 +50,8 @@ public class Post extends AppCompatActivity {
     private DataBaseOperation mydb;
 
     private String emailToDB;
+
+    String TAG = "ChatFragment";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,7 +147,57 @@ public class Post extends AppCompatActivity {
         String method = "post";
         MYSQLBackgroundTask backgroundTask = new MYSQLBackgroundTask(this);
         backgroundTask.execute(method,description,rdtype,emailToDB);
+
         finish();
 
+    }
+
+    private void setupChannel(){
+
+        Pubnub pubnub = new Pubnub(PubnubKeys.PUBLISH_KEY, PubnubKeys.SUBSCRIBE_KEY);
+
+        //SET channel name
+        PubnubKeys pnk = new PubnubKeys(emailToDB);
+
+        try {
+            pubnub.subscribe(PubnubKeys.CHANNEL_NAME, new Callback() {
+                @Override
+                public void successCallback(String channel, Object message) {
+                    super.successCallback(channel, message);
+                    Log.d("successCallback", "message " + message);
+                }
+
+                @Override
+                public void successCallback(String channel, Object message, String timetoken) {
+                    super.successCallback(channel, message, timetoken);
+                }
+
+                @Override
+                public void errorCallback(String channel, PubnubError error) {
+                    super.errorCallback(channel, error);
+                    Log.d("errorCallback", "error " + error);
+                }
+
+                @Override
+                public void connectCallback(String channel, Object message) {
+                    super.connectCallback(channel, message);
+                    Log.d("connectCallback", "message " + message);
+                }
+
+                @Override
+                public void reconnectCallback(String channel, Object message) {
+                    super.reconnectCallback(channel, message);
+                    Log.d("reconnectCallback", "message " + message);
+                }
+
+                @Override
+                public void disconnectCallback(String channel, Object message) {
+                    //super.disconnectCallback(channel, message);
+                    //Log.d("disconnectCallback", "message " + message);
+                }
+            });
+        } catch (PubnubException pe) {
+            Log.d(TAG, pe.toString());
+        }
     }
 }
