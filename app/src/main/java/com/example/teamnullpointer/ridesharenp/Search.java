@@ -1,27 +1,18 @@
 package com.example.teamnullpointer.ridesharenp;
 
+import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Color;
 import android.os.AsyncTask;
-import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -35,10 +26,22 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.ArrayList;
 import java.util.List;
 
-public class ShowDriverPosts extends AppCompatActivity {
+/**
+ * Created by Eric Wong on 12/15/2015.
+ */
+
+/*
+    1.Need to search user to work.   When button is click, takes the field and searches
+    the database for the name and displays it.
+
+    2.The display can be clicked to go to the user's profile???
+
+ */
+public class Search extends AppCompatActivity {
+    private Button searchBut;
+    private EditText searchField;
     private ListView listview;
     private List<String> list_file;
     private ListView listView;
@@ -47,7 +50,7 @@ public class ShowDriverPosts extends AppCompatActivity {
     private JSONArray jsonArray;
     private PostDatabaseAdapter postdatabaseadapter;
     private DataBaseOperation mydb; //Local DB
-    private String userEmail, email2;
+    private String search1;
 
 
     //Retrieve database info
@@ -56,80 +59,31 @@ public class ShowDriverPosts extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show_driver_posts);
-
-        mydb = new DataBaseOperation(getApplicationContext());
-
+        setContentView(R.layout.activity_search_users);
+        setTitle("Search Users");
         run();
     }
 
     private void run(){
-        layout();
-        retrievePosts();
-        getEmail();
-        clicks();
+        searchLayout();
+        buttonPressed();
     }
-
-    public void getEmail(){
-        Cursor res = mydb.getAllData();
-        Boolean contains = res.moveToNext();
-
-        if(contains == true) {
-            userEmail = res.getString(1);
-        }
+    private void searchLayout() {
+         searchBut = (Button) findViewById(R.id.searchBut);
+         searchBut.setText("Search User");
+         searchField = (EditText) findViewById(R.id.searchUserText);
+         searchField.setHint("Enter Email of User");
     }
-
-    private void layout(){
-        listView = (ListView) findViewById(R.id.listviewid);
-
-        postdatabaseadapter = new PostDatabaseAdapter(this,R.layout.row_layout);
-        listView.setAdapter(postdatabaseadapter);
-
-        setTitle("Drivers");
-
-    }
-
-    private void retrievePosts(){
-        json_string = getIntent().getExtras().getString("json_data");
-
-        try {
-            jsonObject = new JSONObject(json_string);
-            int count = 0;
-            jsonArray = jsonObject.getJSONArray("server_response");
-            String description;
+    private void buttonPressed() {
+        searchBut.setOnClickListener(new View.OnClickListener() {
             String email;
-            while(count<jsonArray.length()) {
-                JSONObject JO = jsonArray.getJSONObject(count);
-                description = JO.getString("description");
-                email = JO.getString("email");
-
-                PostDatabase postdatabase = new PostDatabase(description, email);
-                postdatabaseadapter.add(postdatabase);
-
-                count++;
-            }
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void clicks(){
-
-        listView.setOnItemClickListener(new ListView.OnItemClickListener() {
-            String email;
-            @Override
-            public void onItemClick(AdapterView<?> a, View v, int position, long l) {
-
-                email = postdatabaseadapter.getRowEmail(position);
+            public void onClick(View v) {
                 new startBackgroundTask().execute();
-
             }
 
             class startBackgroundTask extends AsyncTask<Void, Void, String> {
-
+                String search = searchField.getText().toString();
                 String json_url;
-                String json_string;
 
                 @Override
                 protected void onPreExecute() {
@@ -138,9 +92,9 @@ public class ShowDriverPosts extends AppCompatActivity {
 
                 @Override
                 protected String doInBackground(Void... voids) {
-                    String email1 = getSQLDB(email);
-                    email2 = getSQLDB(userEmail);
-                    return email1;
+                   // String email1 = getSQLDB(email);
+                    search1 = getSQLDB(search);
+                    return search1;
                 }
 
                 @Override
@@ -153,13 +107,13 @@ public class ShowDriverPosts extends AppCompatActivity {
                     json_string = result;
                     Intent intent = new Intent(getApplicationContext(), ViewProfile.class);
                     intent.putExtra("json_data", json_string);
-                    intent.putExtra("this_email", email2);
+                    intent.putExtra("this_email", search1);
                     startActivity(intent);
                 }
             }
         });
-    }
 
+    }
     private String getSQLDB(String email){
         String JSON_STRING;
         try {
@@ -198,7 +152,6 @@ public class ShowDriverPosts extends AppCompatActivity {
         return "FAILED";
     }
 
-
     //Handle back button
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -206,5 +159,21 @@ public class ShowDriverPosts extends AppCompatActivity {
             finish();
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    //Maybe add the menu options
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

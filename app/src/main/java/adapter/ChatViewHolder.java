@@ -8,10 +8,6 @@ import android.widget.TextView;
 
 import com.example.teamnullpointer.ridesharenp.R;
 
-/**
- * Created by Anjith Sasindran
- * on 11-Oct-15.
- */
 public class ChatViewHolder extends RecyclerView.ViewHolder {
 
     LinearLayout chatHolder;

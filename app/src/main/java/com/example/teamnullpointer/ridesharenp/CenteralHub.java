@@ -33,7 +33,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 public class CenteralHub extends AppCompatActivity {
-    private Button postbut, driverbut, riderbut, myprofilebut, editprofilebut, mycarpoolbut;
+    private Button postbut, driverbut, riderbut, myprofilebut, editprofilebut, mycarpoolbut, msgbut, searchbut;
     private Context ctx;
     private String userEmail;
     private DataBaseOperation mydb; //Local DB
@@ -76,13 +76,17 @@ public class CenteralHub extends AppCompatActivity {
         myprofilebut = (Button) findViewById(R.id.myprofilebut);
         editprofilebut = (Button) findViewById(R.id.editprofilebut);
         mycarpoolbut = (Button) findViewById(R.id.mycarpoolbutid);
+        msgbut = (Button) findViewById(R.id.messengerbut);
+        searchbut = (Button) findViewById(R.id.searchprofilebut);
 
         postbut.setText("Post");
         driverbut.setText("Find Drivers");
         riderbut.setText("Find Riders");
         myprofilebut.setText("My Profile");
         editprofilebut.setText("Edit Profile");
-        mycarpoolbut.setText("My Carpools");
+        mycarpoolbut.setText("Carpools");
+        msgbut.setText("Messenger");
+        searchbut.setText("Search");
 
     }
 
@@ -101,7 +105,12 @@ public class CenteralHub extends AppCompatActivity {
             public void onClick(View v) {
                 startActivity(new Intent(ctx, Post.class));
             }
+        });
 
+        searchbut.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(ctx, Search.class));
+            }
         });
 
         driverbut.setOnClickListener(new View.OnClickListener() {
